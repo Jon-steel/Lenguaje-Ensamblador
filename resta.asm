@@ -1,0 +1,39 @@
+include 'emu8086.inc'
+org 100h
+
+.data  
+resta db 2 dup (?)
+
+.code
+main proc
+    
+    printn ""
+    print "primer numero: "
+    call scan_num
+    mov resta[0],cl
+    printn ""
+    print "segudo numero: "
+    call scan_num
+    mov resta[1],cl
+    
+    xor ax,bx
+    
+    mov al,resta[0]
+    sub al,resta[1] 
+    
+    printn ""
+    print "la resta es: "
+    call print_num
+    
+main endp
+    exit:
+    printn ""
+    print  "enter para salir"
+    mov ah,0
+    int 12h
+    ret 
+    
+    define_print_string
+    define_print_num
+    define_print_num_uns
+    define_scan_num
